@@ -1,14 +1,17 @@
 "use client";
-import React from "react";
+import React, { FunctionComponent } from "react";
 import Image from "next/image";
 import pic1 from "../app/pic/pic1.png";
+import { useState } from "react";
+import product1 from "../app/pic/product1.png";
+
 type CardProps = {
   //created props
   name: string; //name string
   userName: string; //usewrname srting
 };
-
 const Card = ({ name, userName }: CardProps) => {
+  const [count, SetCount] = useState(12);
   //created prop both name,userName
   return (
     <>
@@ -19,11 +22,28 @@ const Card = ({ name, userName }: CardProps) => {
           <h2 className="card-title">{userName}</h2> {/*  props with userName*/}
           <div className="flex items-center">
             <div className=" h-10 w-10">
-              <Image src={pic1} alt="Test" /> {/* picture */}
+              <Image src={product1} alt="Test" /> {/* picture */}
             </div>
-            <button className="btn btn-xs">+</button> {/* created button*/}
-            <p className=" flex-grow-0 ml-0">{name}</p>{" "}
-            <button className="btn btn-xs">-</button>
+            <button
+              id="increaseButton"
+              className="btn btn-xs"
+              onClick={() => {
+                SetCount((val) => val + 1);
+              }}
+            >
+              +
+            </button>{" "}
+            {/* created button*/}
+            <label id="countLabel">{count}</label>
+            <button
+              id="decreaseButton"
+              className="btn btn-xs"
+              onClick={() => {
+                SetCount((val) => val - 1);
+              }}
+            >
+              -
+            </button>
           </div>
           <div className="card-actions justify-end">
             <button className="btn btn-primary">Buy Now-</button>
